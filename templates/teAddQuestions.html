@@ -1,0 +1,129 @@
+
+{% extends "teacherBase.html" %}
+{% block content %}
+
+ 
+<style>
+
+    h1,td{color: rgb(21, 22, 22);
+            padding: 15px;
+            }
+    input{
+        background-color: rgb(192, 219, 228);
+        height: 50px;
+        /* border-radius: 2.5em;  */
+        border-style:none;
+        font-size: 15px;
+            } 
+    input[type=password]{
+        /* color: black; */
+        background-color: rgb(192, 219, 228);
+        height: 50px;
+        /* border-radius: 2.5em; */
+        font-size: 15px;
+        /* border-color: rgb(15, 15, 15); */
+        border-style:none;
+    }
+    input[type=email]{
+        /* color: black; */
+        background-color: rgb(192, 219, 228);
+        height: 50px;
+        /* border-radius: 2.5em;  */
+        font-size: 15px;
+        /* border-color: rgb(15, 15, 15); */
+        border-style:none;
+    }
+
+
+    button{height: 40px;
+            padding: 5px 15px;
+            color: black;
+            background-color:cornflowerblue;
+            border-radius: 2em;
+            border-color: aliceblue;
+        }
+    
+    th {
+    background-color:rgb(78, 154, 173);
+    color:wheat;
+    padding: 10px;
+
+}
+.formFe{
+    width: 50%;
+}
+
+    
+</style>
+<div class="formstyle">
+    <br>
+    <br>
+<center>
+<h1>Add Questions for the subject: {{su.subject}}</h1>
+<br>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td class="formFe"><textarea type="text" class="form-control" required name="question" id="" placeholder="Question" ></textarea></td>
+        </tr>
+        <tr>
+            <td class="formFe"><textarea type="text" class="form-control" required name="answer" id="" placeholder="Answer" ></textarea></td>
+        </tr>
+        <tr>
+            <td class="formFe"><input type="text" class="form-control" required name="module" id="" placeholder="Module" ></td>
+        </tr>
+        <tr>
+            <td class="formFe"><input type="text" class="form-control" required name="unit" id="" placeholder="Unit" ></td>
+        </tr>        
+        <tr>
+            <td class="formFe">
+                <select name="difficulty" class="form-control" required>
+                    <option value="" selected disabled>Select Difficulty</option>
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                </select>
+            </td>
+        </tr>     
+        <tr>
+            <td class="formFe">
+                <select name="importance" class="form-control" required>
+                    <option value="" selected disabled>Select Importance</option>
+                    <option value="Level 1">Level 1</option>
+                    <option value="Level 2">Level 2</option>
+                    <option value="Level 3">Level 3</option>
+                </select>
+            </td>
+        </tr>    
+        <tr>
+            <td class="formFe">
+                <select name="mark" class="form-control" required>
+                    <option value="" selected disabled>Select Mark</option>
+                    <option value="2">2</option>
+                    <option value="5">5</option>
+                    <option value="15">15</option>
+                </select>
+            </td>
+        </tr>    
+        <tr>     
+            <td class="text-center formFe"><button color="black"><b>ADD</b></button></td>
+        </tr>
+    </table>
+</form>
+</center>
+
+</div>
+<br>
+<br>
+
+
+
+
+{% if messages %}
+{% for msg in messages %}
+<script>alert('{{msg}}')</script>
+{% endfor %}
+{% endif %}
+
+{% endblock %}

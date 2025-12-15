@@ -1,0 +1,129 @@
+
+{% extends "adminBase.html" %}
+{% block content %}
+
+ 
+<style>
+
+    h1,td{color: rgb(21, 22, 22);
+            padding: 15px;
+            }
+    input{
+        background-color: rgb(192, 219, 228);
+        height: 50px;
+        /* border-radius: 2.5em;  */
+        border-style:none;
+        font-size: 15px;
+            } 
+    input[type=password]{
+        /* color: black; */
+        background-color: rgb(192, 219, 228);
+        height: 50px;
+        /* border-radius: 2.5em; */
+        font-size: 15px;
+        /* border-color: rgb(15, 15, 15); */
+        border-style:none;
+    }
+    input[type=email]{
+        /* color: black; */
+        background-color: rgb(192, 219, 228);
+        height: 50px;
+        /* border-radius: 2.5em;  */
+        font-size: 15px;
+        /* border-color: rgb(15, 15, 15); */
+        border-style:none;
+    }
+
+
+    button{height: 40px;
+            width: 90px;
+            color: black;
+            background-color:cornflowerblue;
+            border-radius: 2em;
+            border-color: aliceblue;
+            margin-left: 250px;
+        }
+    
+    th {
+    background-color:rgb(78, 154, 173);
+    color:wheat;
+    padding: 10px;
+
+}
+
+    
+</style>
+<div class="formstyle">
+    <br>
+    <br>
+<center>
+<h1>Courses</h1>
+<br>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td><input type="text" class="form-control" required name="course" placeholder="Course Name" size="70"></td>
+        </tr>
+        <tr>
+            <td><input type="number" class="form-control" required name="sem" placeholder="Total Semesters" min="1" max="8"></td>
+        </tr>
+        <tr>
+            <td>
+                <select name="dept" class="form-control" id="" required>
+                    <option value="" selected disabled>Select Department</option>
+                    {% for c in depts %}
+                        <option value="{{c.id}}">{{c.programs}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        
+        
+        
+            
+            <td><button color="black"><b>ADD</b></button></td>
+        </tr>
+    </table>
+</form>
+</center>
+
+</div>
+<br>
+<br>
+{% if data %}
+<table id="tb" style="width:60%;border-collapse:separate;margin:auto">
+    <tr>
+        <th>Sl/No.</th>
+        <th>Course</th>
+        <th>Semesters</th>
+        <th>Department</th>
+        <th></th>
+
+      <th colspan="2"></th>
+    </tr>
+    {% for s in data %}
+    <tr>
+        <td >{{forloop.counter}}</td>
+        <td >{{s.course}}</td>
+        <td >{{s.semesters}}</td>
+        <td >{{s.Programs.programs}}</td>
+       <td><a href="/adminDeleteCourse?id={{s.id}}" class="btn btn-danger">Delete</a></td>
+
+       
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+
+
+
+{% if messages %}
+{% for msg in messages %}
+<script>alert('{{msg}}')</script>
+{% endfor %}
+{% endif %}
+
+
+{% endblock %}

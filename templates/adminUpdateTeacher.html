@@ -1,0 +1,96 @@
+{%extends 'adminBase.html' %}
+{% block content %}
+<style>
+   h1,td{color: rgb(21, 22, 22);
+            padding: 15px;
+            }
+    textarea{
+        background-color: rgb(192, 219, 228);
+        height: 50px;
+        border-radius: 2.5em;  
+        border-style:none;
+        font-size: 15px;
+    }
+    input{
+        background-color: rgb(192, 219, 228);
+        height: 50px;
+        border-radius: 2.5em;
+        border-style:none;
+        font-size: 15px;
+            } 
+    input[type=password]{
+        /* color: black; */
+        background-color: rgb(192, 219, 228);
+        height: 50px;
+        border-radius: 2.5em;
+        font-size: 15px;
+        /* border-color: rgb(15, 15, 15); */
+        border-style:none;
+    }
+    input[type=email]{
+        /* color: black; */
+        background-color: rgb(192, 219, 228);
+        height: 50px;
+        border-radius: 2.5em; 
+        font-size: 15px;
+        /* border-color: rgb(15, 15, 15); */
+        border-style:none;
+    
+    }
+
+
+    button{height: 40px;
+            width: 90px;
+            color: black;
+            background-color:cornflowerblue;
+            border-radius: 2em;
+            border-color: aliceblue;}
+    
+    th {
+    background-color:rgb(78, 154, 173);
+    color:wheat;
+    padding: 10px;
+}
+    
+</style>
+<center>
+    <div class="center">
+        <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <br>
+        <br>
+        <h1>Update Teacher Details</h1>
+        <br>
+        <table style="margin-left: 200px;">
+            <tr>
+                <td><input type="text" name="name" value="{{data.name}}" required size="70" style="padding: 20px;"></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="email" value="{{data.email}}" required size="70" style="padding: 20px;"></td>
+            </tr>
+           
+            <!-- <tr>
+                <td><textarea name="add" required size="70" >{{data.address}}</textarea></td>
+            </tr> -->
+            <tr>
+                <td><input type="text" name="contact" pattern="[6,7,8,9][]0-9]{9}+" value="{{data.contact}}" required size="70" style="padding: 20px;"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button color="black" style="margin-left: -400px;"><b>UPDATE</b></button></td>
+            </tr>
+        </table>
+   
+        </form>
+    
+    </div>
+</center>
+{% if messages %}
+   {% for msg in messages %}
+       <script>
+        alert('{{msg}}')
+       </script>
+    {% endfor %}
+{% endif %}
+{% endblock %}
+

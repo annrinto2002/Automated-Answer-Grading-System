@@ -1,0 +1,222 @@
+
+{% extends "teacherBase.html" %}
+{% block content %}
+
+ 
+<style>
+
+    h1,td{color: rgb(21, 22, 22);
+            padding: 15px;
+            }
+    input{
+        background-color: rgb(192, 219, 228);
+        height: 50px;
+        /* border-radius: 2.5em;  */
+        border-style:none;
+        font-size: 15px;
+            } 
+    input[type=password]{
+        /* color: black; */
+        background-color: rgb(192, 219, 228);
+        height: 50px;
+        /* border-radius: 2.5em; */
+        font-size: 15px;
+        /* border-color: rgb(15, 15, 15); */
+        border-style:none;
+    }
+    input[type=email]{
+        /* color: black; */
+        background-color: rgb(192, 219, 228);
+        height: 50px;
+        /* border-radius: 2.5em;  */
+        font-size: 15px;
+        /* border-color: rgb(15, 15, 15); */
+        border-style:none;
+    }
+
+
+    button{height: 40px;
+            padding: 5px 15px;
+            color: black;
+            background-color:cornflowerblue;
+            border-radius: 2em;
+            border-color: aliceblue;
+        }
+    
+    th {
+    background-color:rgb(78, 154, 173);
+    color:wheat;
+    padding: 10px;
+
+}
+.formFe{
+    width: 50%;
+}
+
+    
+</style>
+<div class="formstyle">
+    <br>
+    <br>
+<center>
+<h1>Add Questions</h1>
+<br>
+<form action="/teAddQuestions" method="get" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td class="formFe">
+                <select name="dept" class="form-control" id="dept" required>
+                    <option value="" selected disabled>Select Department</option>
+                    {% for c in depts %}
+                        <option value="{{c.id}}">{{c.programs}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="formFe">
+                <select name="course" class="form-control" id="course" required>
+                    <option value="" selected disabled>Select Course</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="formFe"><input type="number" class="form-control" required name="sem" id="sem" placeholder="Semesters" min="1"></td>
+        </tr>
+        
+        <tr>
+            <td class="formFe">
+                <select name="sub" class="form-control" id="sub" required>
+                    <option value="" selected disabled>Select Subject</option>
+                </select>
+            </td>
+        </tr>     
+        <tr>     
+            <td class="text-center formFe"><button color="black"><b>ADD QUESTIONS</b></button></td>
+        </tr>
+    </table>
+</form>
+</center>
+
+</div>
+<br>
+<br>
+{% if exams %}
+<table id="tb" style="width:60%;border-collapse:separate;margin:auto">
+    <tr>
+        <th>Sl/No.</th>
+        <th>Date</th>
+        <th>Exam</th>
+        <th>Department</th>
+        <th>Course</th>
+        <th>Semester</th>
+        <th>Subject</th>
+        <th>Exam Date</th>
+        <th>Exam Controller</th>
+        <th></th>
+
+      <th colspan="2"></th>
+    </tr>
+    {% for s in exams %}
+    <tr>
+        <td >{{forloop.counter}}</td>
+        <td >{{s.date}}</td>
+        <td >{{s.exam}}</td>
+        <td >{{s.Subjects.Course.Programs.programs}}</td>
+        <td >{{s.Subjects.Course.course}}</td>
+        <td >{{s.Subjects.semesters}}</td>
+        <td >{{s.Subjects.subject}}</td>
+        <td >{{s.examDate}}</td>
+        <td >{{s.Teacher.name}}</td>
+       <td><a href="/admindeleteexam?id={{s.id}}" class="btn btn-danger">Delete</a></td>
+
+       
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+
+
+
+{% if messages %}
+{% for msg in messages %}
+<script>alert('{{msg}}')</script>
+{% endfor %}
+{% endif %}
+
+<script>
+    var today = new Date();
+    var tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 7 );
+    var minDate = tomorrow.toISOString().split('T')[0];
+    document.getElementById('txtDate').setAttribute('min', minDate);
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$('#dept').change(function () {
+			var y = $('#dept').val();
+			$('#course')
+				.find('option')
+				.remove()
+				.end()
+				.append('<option selected disabled>Select Course</option>')
+				.val('whatever');
+			$.ajax({
+				url: '/getcourse?id=' + y,
+				type: 'GET',
+				success: function (data) {
+					var jsondata = $.parseJSON(data);
+					$(jsondata).each(function (index, o) {
+						$('#course').append(
+							$('<option></option>').text(o[1]).attr('value', o[0])
+						);
+					});
+				},
+			});
+		});
+	});
+	$(document).ready(function () {
+		$('#course').change(function () {
+			var y = $('#course').val();
+			$.ajax({
+				url: '/getsem?id=' + y,
+				type: 'GET',
+				success: function (data) {
+					var jsondata = $.parseJSON(data);
+					$(jsondata).each(function (index, o) {
+						$('#sem').attr('max',o)
+					});
+				},
+			});
+		});
+	});
+    $(document).ready(function () {
+		$('#sem').change(function () {
+			var y = $('#sem').val();
+			var course = $('#course').val();
+			$('#sub')
+				.find('option')
+				.remove()
+				.end()
+				.append('<option selected disabled>Select Subject</option>')
+				.val('whatever');
+			$.ajax({
+				url: '/getsub?id=' + y + '&course=' + course,
+				type: 'GET',
+				success: function (data) {
+					var jsondata = $.parseJSON(data);
+					$(jsondata).each(function (index, o) {
+						$('#sub').append(
+							$('<option></option>').text(o[1]).attr('value', o[0])
+						);
+					});
+				},
+			});
+		});
+	});
+</script>
+
+{% endblock %}

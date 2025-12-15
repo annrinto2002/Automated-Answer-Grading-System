@@ -1,0 +1,118 @@
+{% extends "commonbase.html" %}
+{% block content %}
+
+
+
+<style>
+    h1,td{color: rgb(21, 22, 22);
+            padding: 15px;
+            }
+    input{
+        background-color: rgb(192, 219, 228);
+        height: 50px;
+        border-radius: 2.5em;
+        border-style:none;
+        font-size: 15px;
+            } 
+    input[type=password]{
+        /* color: black; */
+        background-color: rgb(192, 219, 228);
+        height: 50px;
+        border-radius: 2.5em;
+        font-size: 15px;
+        /* border-color: rgb(15, 15, 15); */
+        border-style:none;
+    }
+
+    button{height: 40px;
+            width: 90px;
+            color: black;
+            background-color:cornflowerblue;
+            border-radius: 2em;
+            border-color: aliceblue;
+            margin-bottom: 50px;
+            margin-left: 195px;
+        }
+     /* input[type=password]{background-color: rgb(255, 255, 255);
+                    width:370px;
+                    border-color: black;}  */
+    .formstyle{background-color: rgb(255, 255, 255);}
+    
+
+    
+</style>
+<div class="formstyle">
+<center>
+<h1 style="margin-top: 50px;">SIGN IN</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+        <tr><tr>
+            <!-- <td><h4>User Name:</h4></td></tr> -->
+            <td><input type="text" required name="name" placeholder="Username" size="55" style="padding: 20px;"></td>
+        </tr>
+        
+        <tr><tr>
+            <!-- <td><h4>Password:</h4></td></tr> -->
+            <td><input type="password" required name="pass" placeholder="Password" size="50" style="padding: 20px;"></td>
+        </tr>
+        <tr>
+            
+            <td><button color="black"><b>Signin</b></button></td>
+        </tr>
+    </table>
+</form>
+</center>
+
+</div>
+
+    <!-- <h2>Login</h2> -->
+    <!-- <div class="contact-agile">
+		<div class="faq">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+			
+			<div class="container"> -->
+				
+				<!-- <table>
+                    <tr><tr>
+                        <td><input type="text" required name="name" placeholder="Username" size="70"></td>
+                    </tr>
+                    
+                    <tr><tr>
+                        <td><input type="password" required name="pass" placeholder="Password" size="70"></td>
+                    </tr>
+                    <tr>
+                        
+                        <td><button color="black"><b>Login</b></button></td>
+                    </tr>
+                </table> -->
+				
+                
+				
+				<!-- <div class="clearfix"></div>
+				<form action="#" method="post">
+                    <input type="email" name="name" placeholder="Username" required="">
+                    <input type="password" name="pass" placeholder="Password" required="">
+					
+					<input type="submit" value="SIGNIN">
+				</form> -->
+			</div>
+		</div>
+	</div>
+	
+
+
+	</div>
+<!-- //banner -->
+<!-- contact -->
+	
+
+{% if messages %}
+{% for msg in messages %}
+<script>alert('{{msg}}')</script>
+{% endfor %}
+{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,113 @@
+
+{% extends "teacherBase.html" %}
+{% block content %}
+
+ 
+<style>
+
+    h1,td{color: rgb(21, 22, 22);
+            padding: 15px;
+            }
+    input{
+        background-color: rgb(192, 219, 228);
+        height: 50px;
+        /* border-radius: 2.5em;  */
+        border-style:none;
+        font-size: 15px;
+            } 
+    input[type=password]{
+        /* color: black; */
+        background-color: rgb(192, 219, 228);
+        height: 50px;
+        /* border-radius: 2.5em; */
+        font-size: 15px;
+        /* border-color: rgb(15, 15, 15); */
+        border-style:none;
+    }
+    input[type=email]{
+        /* color: black; */
+        background-color: rgb(192, 219, 228);
+        height: 50px;
+        /* border-radius: 2.5em;  */
+        font-size: 15px;
+        /* border-color: rgb(15, 15, 15); */
+        border-style:none;
+    }
+
+
+    button{height: 40px;
+            width: 90px;
+            color: black;
+            background-color:cornflowerblue;
+            border-radius: 2em;
+            border-color: aliceblue;
+        }
+    
+    th {
+    background-color:rgb(78, 154, 173);
+    color:wheat;
+    padding: 10px;
+
+}
+.formFe{
+    width: 50%;
+}
+
+    
+</style>
+<h1 class="text-center">View Exams</h1>
+{% if data %}
+<table id="tb" style="width:60%;border-collapse:separate;margin:auto">
+    <tr>
+        <th>Sl/No.</th>
+        <th>Date</th>
+        <th>Exam</th>
+        <th>Department</th>
+        <th>Course</th>
+        <th>Semester</th>
+        <th>Subject</th>
+        <th>Exam Date</th>
+        <th colspan="3"></th>
+        
+        <th colspan="2"></th>
+    </tr>
+    
+    {% for s in data %}
+    <tr>
+        <td >{{forloop.counter}}</td>
+        <td >{{s.date}}</td>
+        <td >{{s.exam}}</td>
+        <td >{{s.Subjects.Course.Programs.programs}}</td>
+        <td >{{s.Subjects.Course.course}}</td>
+        <td >{{s.Subjects.semesters}}</td>
+        <td >{{s.Subjects.subject}}</td>
+        <td >{{s.examDate}}</td>
+        <td >{{s.Teacher.name}}</td>
+        <td>
+            <a href="/adminPrintQP?id={{s.id}}" class="btn btn-primary">View Question Paper</a>
+        </td>
+        <td>
+            <a href="/teAddStudentAnswerSheetWritten?id={{s.id}}" class="btn btn-warning">Add Student Written Answer Sheet</a>
+            <a href="/teViewResults?id={{s.id}}&for=Written" class="btn btn-success">View Results</a>
+        </td>
+        <td>
+            <a href="/teAddStudentAnswerSheetPrinted?id={{s.id}}" class="btn btn-info">Add Student Printed Answer Sheet</a>
+            <a href="/teViewResults?id={{s.id}}&for=Printed" class="btn btn-success">View Results</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+
+
+
+{% if messages %}
+{% for msg in messages %}
+<script>alert('{{msg}}')</script>
+{% endfor %}
+{% endif %}
+
+
+
+{% endblock %}

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Graphics Exam Paper</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        .exam-paper {
+            background: #fff;
+            padding: 50px;
+            padding-top: 100px;
+            margin: 0 auto;
+            /* width: 80%; */
+            width: 700px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .content{
+            width: 650px;
+            margin: auto;
+
+        }
+        header, .part {
+            margin-bottom: 20px;
+        }
+        h1, h2, h3, h4 {
+            color: #333;
+            text-align: center;
+        }
+        h1 {
+            font-size: 22px;
+            margin-bottom: 0;
+        }
+        h2, h3 {
+            font-size: 18px;
+            margin-top: 5px;
+        }
+        h4 {
+            font-size: 16px;
+            /* background-color: #eee; */
+            padding: 5px;
+            text-align: center;
+        }
+        ol, ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .mid{
+            display: flex;
+            justify-content: space-between;
+        }
+        .part p{
+            text-align: center;
+        }
+        .qnos{
+            font-weight: 700;
+        }
+        .btn{
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        button{
+            background-color: #430A5D;
+            color: #fff;
+            border: none;
+            outline: none;
+            padding: 10px 20px;
+            font-size: 20px;
+            border-radius: 5px;
+        }
+        button:hover{
+            cursor: pointer;
+            background-color: #6420AA;
+        }
+        ol{
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="btn" id="btn">
+        <button onclick="nowPrint()" >Print</button>
+    </div>
+    <div class="exam-paper">
+        <div class="content">
+
+            <header>
+                <h1>{{exam.exam}}</h1>
+                <h2>Semester {{exam.Subjects.semesters}}<br> {{exam.Subjects.Course.course}}</h2>
+                <h3>{{exam.Subjects.subject}}</h3>
+                <div class="mid"><p>Time: 2 Hours </p><p>Max. Marks : 50</p></div>
+            </header>
+
+            <section class="part" id="part-b">
+                <h4>Part A</h4>
+                <p><em>Answer all questions (5 marks each)</em></p>
+                <ol start="1">
+                    {% for q in data %}
+                    {% if q.Questions.mark == '5' %}
+                    <li>{{q.QuestionNo}}. {{q.Questions.question}}</li>
+                    {% endif %}
+                    {% endfor %}
+                </ol>
+            </section>
+            <section class="part" id="part-c">
+                <h4>Part B</h4>
+                <p><em>Each question carries 15 marks.</em></p>
+                <ol start="5">
+                    {% for q in data %}
+                    {% if q.Questions.mark == '15' %}
+                    <li>{{q.QuestionNo}}. {{q.Questions.question}}</li>
+                    {% endif %}
+                    {% endfor %}
+                </ol>
+            </section>
+        </div>
+    </div>
+    <script>
+        function nowPrint(){
+            btn = document.getElementById("btn")
+            btn.style.display = "none"
+            window.print();
+            window.location = '/adminExam'
+        }
+    </script>
+</body>
+</html>

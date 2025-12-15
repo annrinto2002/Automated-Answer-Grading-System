@@ -1,0 +1,156 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>AAGS</title>
+		<!-- for-mobile-apps -->
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta
+			name="keywords"
+			content="Educative Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design"
+		/>
+		<script type="application/x-javascript">
+			addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+				function hideURLbar(){ window.scrollTo(0,1); }
+		</script>
+		<!-- //for-mobile-apps -->
+		<link
+			href="../static/css/bootstrap.css"
+			rel="stylesheet"
+			type="text/css"
+			media="all"
+		/>
+		<link
+			href="../static/css/style.css"
+			rel="stylesheet"
+			type="text/css"
+			media="all"
+		/>
+		<link href="../static/css/font-awesome.css" rel="stylesheet" />
+
+		<!--web-fonts-->
+		<link
+			href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800"
+			rel="stylesheet"
+		/>
+		<link
+			href="//fonts.googleapis.com/css?family=Lato:300,400,700"
+			rel="stylesheet"
+		/>
+		<!--//web-fonts-->
+		<!--//fonts-->
+		<!-- js -->
+	</head>
+	<body>
+		<!-- banner -->
+		<div class="banner about-banner-w3ls" id="home">
+			<!-- header -->
+			<header>
+				<div class="container-fluid">
+					<!-- navigation -->
+					<nav class="navbar navbar-default" style="display: flex; justify-content: space-between;">
+						<!-- Brand and toggle get grouped for better mobile display -->
+						<div class="navbar-header">
+							<button
+								type="button"
+								class="navbar-toggle collapsed"
+								data-toggle="collapse"
+								data-target="#bs-example-navbar-collapse-1"
+								aria-expanded="false"
+							>
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+							<div class="w3-logo">
+								<h1><a href="/">AAGS</a></h1>
+								<!-- <label></label> -->
+							</div>
+						</div>
+
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div
+							class="collapse navbar-collapse"
+							id="bs-example-navbar-collapse-1"
+						>
+							<ul class="nav navbar-nav">
+								<li><a class="active" href="/adminHome">Home</a></li>
+								<li><a class="active" href="/adminTeacher">Teachers</a></li>
+								<li><a class="active" href="/adminProgram">Departments</a></li>
+								<li><a class="active" href="/adminCourse">Courses</a></li>
+								<li><a class="active" href="/adminSubjects">Subjects</a></li>
+								<li><a class="active" href="/adminExam">Exam</a></li>
+								{% comment %} <li><a class="active" href="/ecviewqus">Questions</a></li> {% endcomment %}
+								<li><a class="active" href="/">Logout</a></li>
+							</ul>
+						</div>
+					</nav>
+					<div class="clearfix"></div>
+				</div>
+			</header>
+		</div>
+
+		{% block content %} {% endblock %}
+
+		<div class="copyright-wthree">
+			<p></p>
+		</div>
+		<!-- //Footer -->
+		<a href="#home" class="scroll" id="toTop" style="display: block">
+			<span id="toTopHover" style="opacity: 1"> </span
+		></a>
+		<!-- //smooth scrolling -->
+
+		<script
+			type="text/javascript"
+			src="../static/js/jquery-2.1.4.min.js"
+		></script>
+
+		<!-- start-smoth-scrolling -->
+		<script type="text/javascript" src="../static/js/move-top.js"></script>
+		<script type="text/javascript" src="../static/js/easing.js"></script>
+		<script type="text/javascript">
+			jQuery(document).ready(function ($) {
+				$('.scroll').click(function (event) {
+					event.preventDefault();
+					$('html,body').animate(
+						{ scrollTop: $(this.hash).offset().top },
+						1000
+					);
+				});
+			});
+		</script>
+		<!-- start-smoth-scrolling -->
+		<!-- here stars scrolling icon -->
+		<script type="text/javascript">
+			$(document).ready(function () {
+				/*
+	var defaults = {
+	containerID: 'toTop', // fading element id
+	containerHoverID: 'toTopHover', // fading element hover id
+	scrollSpeed: 1200,
+	easingType: 'linear' 
+	};
+*/
+
+				$().UItoTop({ easingType: 'easeOutQuart' });
+			});
+		</script>
+		<!-- //here ends scrolling icon -->
+		<!--js for bootstrap working-->
+		<script src="../static/js/bootstrap.js"></script>
+		<!-- //for bootstrap working -->
+
+		<!-- script-for-menu -->
+		<script>
+			$('span.menu').click(function () {
+				$('.top-nav ul').slideToggle('slow', function () {});
+			});
+		</script>
+		<!-- script-for-menu -->
+	</body>
+</html>

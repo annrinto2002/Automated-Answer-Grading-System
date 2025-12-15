@@ -1,0 +1,142 @@
+{% extends "teacherBase.html" %} {% block content %}
+
+<style>
+	h1,
+	td {
+		color: rgb(21, 22, 22);
+		padding: 15px;
+	}
+	input {
+		background-color: rgb(192, 219, 228);
+		height: 50px;
+		/* border-radius: 2.5em;  */
+		border-style: none;
+		font-size: 15px;
+	}
+	input[type='password'] {
+		/* color: black; */
+		background-color: rgb(192, 219, 228);
+		height: 50px;
+		/* border-radius: 2.5em; */
+		font-size: 15px;
+		/* border-color: rgb(15, 15, 15); */
+		border-style: none;
+	}
+	input[type='email'] {
+		/* color: black; */
+		background-color: rgb(192, 219, 228);
+		height: 50px;
+		/* border-radius: 2.5em;  */
+		font-size: 15px;
+		/* border-color: rgb(15, 15, 15); */
+		border-style: none;
+	}
+	select {
+		/* color: black; */
+		background-color: rgb(192, 219, 228);
+		/* border-radius: 2.5em;  */
+		font-size: 15px;
+		width: 100%;
+		/* border-color: rgb(15, 15, 15); */
+		border-style: none;
+	}
+
+	button {
+		height: 40px;
+		width: 90px;
+		color: black;
+		background-color: cornflowerblue;
+		border-radius: 2em;
+		border-color: aliceblue;
+		margin-left: 260px;
+	}
+
+	th {
+		background-color: rgb(78, 154, 173);
+		color: wheat;
+		padding: 10px;
+	}
+	/* h1,td{color: black;
+            padding: 15px;
+            }
+    input{color: black;
+            height: 50px;
+            border-radius: 2.5em;
+            font-size: 15px;
+            } 
+
+    button{height: 40px;
+            width: 90px;
+            color: black;
+            border-radius: 2em;}
+    input[type=email]{background-color: azure;
+                    width:370px}
+    input[type=password]{background-color: azure;}
+    .formstyle{background-color: black;} */
+</style>
+<div class="formstyle">
+	<center>
+		<br />
+		<br />
+		<h1>Upload Answer Sheet</h1>
+		<br />
+		<form method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			<table>
+				<tr></tr>
+				<tr>
+					<td>
+						<select name="student" class="form-control" id="course" required>
+							<option value="" selected disabled>Select Student</option>
+							{% for c in data %}
+							<option value="{{c.id}}">{{c.regno}} - {{c.name}}</option>
+							{% endfor %}
+						</select>
+					</td>
+				</tr>
+				<tr></tr>
+				<tr></tr>
+				<tr>
+					<td>
+						<input
+							type="file"
+							required
+							name="answerSheet"
+							size="70"
+							style="padding: 20px"
+						/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<button color="black"><b>ADD</b></button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</center>
+</div>
+<br /><br /><br /><br /><br />
+
+<!-- table {
+    border-collapse:separate;
+    border:none;
+    
+    
+} 
+td{
+    padding: 30px;
+}
+
+th {
+    background-color:lightcoral;
+    color:wheat;
+    padding: 10px;
+
+} -->
+
+{% if messages %} {% for msg in messages %}
+<script>
+	alert('{{msg}}');
+</script>
+{% endfor %} {% endif %} {% endblock %}

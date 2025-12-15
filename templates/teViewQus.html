@@ -1,0 +1,100 @@
+{% extends "teacherBase.html" %} {% block content %}
+
+<style>
+	h1,
+	td {
+		color: rgb(21, 22, 22);
+		padding: 15px;
+	}
+	input {
+		background-color: rgb(192, 219, 228);
+		height: 50px;
+		/* border-radius: 2.5em;  */
+		border-style: none;
+		font-size: 15px;
+	}
+	input[type='password'] {
+		/* color: black; */
+		background-color: rgb(192, 219, 228);
+		height: 50px;
+		/* border-radius: 2.5em; */
+		font-size: 15px;
+		/* border-color: rgb(15, 15, 15); */
+		border-style: none;
+	}
+	input[type='email'] {
+		/* color: black; */
+		background-color: rgb(192, 219, 228);
+		height: 50px;
+		/* border-radius: 2.5em;  */
+		font-size: 15px;
+		/* border-color: rgb(15, 15, 15); */
+		border-style: none;
+	}
+
+	button {
+		height: 40px;
+		width: 90px;
+		color: black;
+		background-color: cornflowerblue;
+		border-radius: 2em;
+		border-color: aliceblue;
+		margin-left: 250px;
+	}
+
+	th {
+		background-color: rgb(78, 154, 173);
+		color: wheat;
+		padding: 10px;
+	}
+</style>
+<div class="container-fluid">
+	<h1 class="text-center">Questions</h1>
+	<form action="" method="post">
+		{% csrf_token %}
+		<input type="search" placeholder="Search here" name="search" id="">
+		<input type="submit" value="Search">
+	</form>
+	{% if data %}
+	<table id="tb" style="width: 100%; border-collapse: separate">
+		<tr>
+			<!-- <th>ID</th> -->
+			<th>Sl/No.</th>
+			<th>Subject</th>
+			<th>Question</th>
+			<th>Answer</th>
+			<th>Module</th>
+			<th>Unit</th>
+			<th>Importance</th>
+			<th>Difficulty</th>
+			<th>Mark</th>
+			<th></th>
+		</tr>
+		{% for s in data %}
+		<tr>
+			<td>{{forloop.counter}}</td>
+			<td>{{s.Subjects.subject}}</td>
+			<td>{{s.question}}</td>
+			<td>{{s.answer}}</td>
+			<td>{{s.unit}}</td>
+			<td>{{s.importance}}</td>
+			<td>{{s.difficulty}}</td>
+			<td>{{s.mark}}</td>
+			<td>
+				<a href="/teDeleteQus?id={{s.id}}" class="btn btn-danger" >Delete</a
+			>
+		</td>
+		<!-- <td><a href="/adminupdateexamdt?id={{s.id}}" style="color:darkgoldenrod">Update</a></td> -->
+	</tr>
+	{% endfor %}
+</table>
+{% else %}
+<h3 class="text-center">No data</h3>
+{% endif %} 
+
+</div>
+{% if messages %} {% for msg in messages %}
+<script>
+	alert('{{msg}}');
+</script>
+{% endfor %} {% endif %} {% endblock %}

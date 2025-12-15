@@ -1,0 +1,100 @@
+
+{% extends "studentBase.html" %}
+{% block content %}
+
+ 
+<style>
+
+    h1,td{color: rgb(21, 22, 22);
+            padding: 15px;
+            }
+    input{
+        background-color: rgb(192, 219, 228);
+        height: 50px;
+        /* border-radius: 2.5em;  */
+        border-style:none;
+        font-size: 15px;
+            } 
+    input[type=password]{
+        /* color: black; */
+        background-color: rgb(192, 219, 228);
+        height: 50px;
+        /* border-radius: 2.5em; */
+        font-size: 15px;
+        /* border-color: rgb(15, 15, 15); */
+        border-style:none;
+    }
+    input[type=email]{
+        /* color: black; */
+        background-color: rgb(192, 219, 228);
+        height: 50px;
+        /* border-radius: 2.5em;  */
+        font-size: 15px;
+        /* border-color: rgb(15, 15, 15); */
+        border-style:none;
+    }
+
+
+    button{height: 40px;
+            width: 90px;
+            color: black;
+            background-color:cornflowerblue;
+            border-radius: 2em;
+            border-color: aliceblue;
+        }
+    
+    th {
+    background-color:rgb(78, 154, 173);
+    color:wheat;
+    padding: 10px;
+
+}
+.formFe{
+    width: 50%;
+}
+
+    
+</style>
+<h1 class="text-center">View Uploads</h1>
+{% if data %}
+<table id="tb" style="width:80%;border-collapse:separate;margin:auto">
+    <tr>
+        <th>Sl/No.</th>
+        <th>Exam Date</th>
+        <th>Valuvation Date</th>
+        <th>Exam</th>
+        <th>Subject</th>
+        <th>Evaluated From</th>
+        <th></th>
+        <th colspan="3"></th>
+        
+        <th colspan="2"></th>
+    </tr>
+    
+    {% for s in data %}
+    <tr>
+        <td >{{forloop.counter}}</td>
+        <td >{{s.exam.date}}</td>
+        <td >{{s.date}}</td>
+        <td >{{s.exam.exam}}</td>
+        <td >{{s.exam.Subjects.subject}}</td>
+        <td >{{s.extractedFrom}}</td>
+        <td >{{s.comment}}</td>
+        <td >{{s.mark}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+
+
+
+{% if messages %}
+{% for msg in messages %}
+<script>alert('{{msg}}')</script>
+{% endfor %}
+{% endif %}
+
+
+
+{% endblock %}
